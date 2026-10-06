@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "students",
+  "info": {
+    "singularName": "student",
+    "pluralName": "students",
+    "displayName": "Student"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 20,
+      "required": true,
+      "unique": true
+    },
+    "Mobile": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 10,
+      "required": true,
+      "unique": true
+    },
+    "IDcard": {
+      "type": "string",
+      "minLength": 13,
+      "maxLength": 13,
+      "required": true,
+      "unique": true
+    }
+  }
+}

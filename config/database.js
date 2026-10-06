@@ -1,7 +1,33 @@
 /** @import { Core } from '@strapi/strapi' */
 
+const fs = require('fs');
 const path = require('path');
 const { isDatabaseClientKind } = require('@strapi/database');
+
+/**
+ * Resolve the application root (the nearest ancestor containing package.json).
+ *
+ * Config files are loaded from `dist/config` in a TypeScript project but from
+ * `config` in a JavaScript one, so `__dirname` cannot be used to locate files
+ * that must live at the app root. The SQLite file in particular must stay at the
+ * app root: `strapi develop` empties `dist` on every restart and would otherwise
+ * delete the database.
+ */
+const appDir = (() => {
+  let dir = __dirname;
+
+  while (!fs.existsSync(path.join(dir, 'package.json'))) {
+    const parent = path.dirname(dir);
+
+    if (parent === dir) {
+      return path.join(__dirname, '..');
+    }
+
+    dir = parent;
+  }
+
+  return dir;
+})();
 
 module.exports = ({ env }) => {
   const client = env('DATABASE_CLIENT', 'sqlite');
@@ -57,7 +83,7 @@ module.exports = ({ env }) => {
     sqlite: {
       client: 'sqlite',
       connection: {
-        filename: path.join(__dirname, '..', env('DATABASE_FILENAME', '.tmp/data.db')),
+        filename: path.resolve(appDir, env('DATABASE_FILENAME', '.tmp/data.db')),
       },
       useNullAsDefault: true,
     },

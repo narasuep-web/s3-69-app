@@ -25,7 +25,9 @@
     "react-router-dom": "^6.30.3",
     "styled-components": "^6.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
   "engines": {
     "node": ">=20.0.0 <=26.x.x",
     "npm": ">=6.0.0"
@@ -33,5 +35,12 @@
   "strapi": {
     "uuid": "0eae4720-0897-4d04-b218-1b15483d3bd4",
     "installId": "a5e4588d7e72179cc57c315f82b14070282cbb9cc9fa9e435067eda6dcc1a239"
+  },
+  "allowScripts": {
+    "better-sqlite3@12.8.0": true,
+    "core-js-pure@3.50.0": true,
+    "esbuild@0.28.2": true,
+    "esbuild@0.21.5": true,
+    "@swc/core@1.16.13": true
   }
 }

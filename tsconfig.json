@@ -1,0 +1,41 @@
+{
+  // Base config shipped by @strapi/typescript-utils
+  "extends": "@strapi/typescript-utils/tsconfigs/server",
+
+  "compilerOptions": {
+    // src/ and config/ must land under <outDir>/src and <outDir>/config,
+    // because Strapi reads distDir/src/api, distDir/config, etc.
+    "rootDir": "./",
+    "outDir": "./dist",
+
+    // This app is still mostly plain JS; only new files are TypeScript.
+    "allowJs": true,
+    "checkJs": false,
+
+    // `strapi develop` deletes everything in outDir (except build/ and *.tsbuildinfo)
+    // and then recompiles. With incremental builds TypeScript sees a valid
+    // .tsbuildinfo, skips emit, and the app boots with no APIs/content-types.
+    // Full emit each time is correct and cheap at this project size.
+    "incremental": false
+  },
+
+  "include": [
+    "./config/**/*.ts",
+    "./config/**/*.js",
+    "./src/**/*.ts",
+    "./src/**/*.js",
+    // JSON must be part of the program so schema.json is copied into outDir.
+    "./src/**/*.json"
+  ],
+
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".tmp",
+    ".cache",
+    "public",
+    "types",
+    "src/admin"
+  ]
+}
